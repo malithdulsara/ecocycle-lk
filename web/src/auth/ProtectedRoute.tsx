@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from './useAuth';
 import type { Role } from '../types/api';
+import { PageLoader } from '../components/Spinner';
 
 interface Props {
   // Leave empty to allow every logged-in user
@@ -12,7 +13,7 @@ export function ProtectedRoute({ allowedRoles }: Readonly<Props>) {
   const location = useLocation();
 
   if (loading) {
-    return <div className="page-loading">Loading...</div>;
+        return <PageLoader />;
   }
   if (!user) {
     // Not logged in: go to login, and come back here after login
