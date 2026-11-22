@@ -64,9 +64,16 @@ api.interceptors.response.use(
 // Reads the "message" from our backend's error response
 export function getErrorMessage(error: unknown): string {
   if (axios.isAxiosError(error)) {
-    const data = error.response?.data as Partial<ApiResponse<unknown>> | undefined;
-    if (data?.message) {
-      return data.message;
+    const body = error.response?.data as Partial<ApiResponse<unknown>> | undefined;
+    // Validation errors come as { field: "message" }. Show the first one.
+    if (body?.data && typeof body.data === 'object') {
+      const firstFieldError = Object.values(body.data as Record<string, unknown>)[0];
+      if (typeof firstFieldError === 'string') {
+        return firstFieldError;
+      }
+    }
+    if (body?.message) {
+      return body.message;
     }
     if (!error.response) {
       return 'Cannot reach the server. Is the backend running?';

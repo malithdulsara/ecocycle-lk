@@ -10,6 +10,7 @@ public record UserResponse(
         String email,
         String phone,
         String role,
+        boolean enabled,
         String preferredLanguage,
         Instant createdAt
 ) {
@@ -20,6 +21,7 @@ public record UserResponse(
                 user.getEmail(),
                 user.getPhone(),
                 user.getRole().name(),
+                user.isEnabled(),
                 user.getPreferredLanguage(),
                 user.getCreatedAt()
         );

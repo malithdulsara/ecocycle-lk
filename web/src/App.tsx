@@ -1,16 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'sonner';
 import { AuthProvider } from './auth/AuthProvider';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import { MENU_ITEMS } from './config/menu';
 import { AppLayout } from './layouts/AppLayout';
+import { CouncilWardsPage } from './pages/admin/CouncilWardsPage';
+import { CouncilsPage } from './pages/admin/CouncilsPage';
+import { UsersPage } from './pages/admin/UsersPage';
 import { ComingSoonPage } from './pages/ComingSoonPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 
-// Every menu item except the dashboard gets a "Coming soon" page for now
-const placeholderPages = MENU_ITEMS.filter((item) => item.path !== '/');
+// Pages that are already built. Every other menu item gets a "Coming soon" page for now.
+const BUILT_PAGES = new Set(['/', '/admin/councils', '/admin/users']);
+const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
 export default function App() {
   return (
@@ -25,6 +30,13 @@ export default function App() {
               <Route index element={<DashboardPage />} />
               <Route path="unauthorized" element={<UnauthorizedPage />} />
 
+              {/* Admin only */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
+                <Route path="/admin/councils" element={<CouncilsPage />} />
+                <Route path="/admin/councils/:councilId" element={<CouncilWardsPage />} />
+                <Route path="/admin/users" element={<UsersPage />} />
+              </Route>
+
               {placeholderPages.map((item) => (
                 <Route key={item.path} element={<ProtectedRoute allowedRoles={item.roles} />}>
                   <Route path={item.path} element={<ComingSoonPage title={item.label} />} />
@@ -36,6 +48,9 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+
+      {/* Small pop-up messages like "Council created" */}
+      <Toaster richColors position="top-right" />
     </AuthProvider>
   );
 }

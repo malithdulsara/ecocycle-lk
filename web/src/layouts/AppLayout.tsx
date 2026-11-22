@@ -18,7 +18,10 @@ export function AppLayout() {
   }
 
   const items = menuForRole(user.role);
-  const currentPage = items.find((item) => item.path === location.pathname);
+    // The menu item for this page. "/admin/councils/5" also belongs to "/admin/councils".
+  const currentPage = items.find(
+    (item) => item.path === location.pathname || (item.path !== '/' && location.pathname.startsWith(`${item.path}/`)),
+  );
 
   async function handleLogout() {
     await logout();
