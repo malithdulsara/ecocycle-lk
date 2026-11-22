@@ -20,6 +20,7 @@ export interface User {
   email: string;
   phone: string | null;
   role: Role;
+  enabled: boolean;
   preferredLanguage: string;
   createdAt: string;
 }
