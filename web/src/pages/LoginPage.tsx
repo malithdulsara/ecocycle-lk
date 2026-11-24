@@ -1,6 +1,6 @@
 import { useState, type SubmitEvent } from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { CircleAlert, Eye, EyeOff, Leaf, Lock, Mail, MapPinned, Truck } from 'lucide-react';
+import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { CalendarDays, CircleAlert, Eye, EyeOff, Leaf, Lock, Mail, MapPinned, Truck } from 'lucide-react';
 import { getErrorMessage } from '../api/client';
 import { useAuth } from '../auth/useAuth';
 import { Logo } from '../components/Logo';
@@ -147,6 +147,17 @@ export function LoginPage() {
               {submitting ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
+                    {/* Guests can see the collection schedule without an account */}
+          <NavLink
+            to="/collection-schedule"
+            className="mt-6 flex items-center gap-3 rounded-xl border border-slate-200 p-4 text-sm transition hover:border-brand-300 hover:bg-brand-50"
+          >
+            <CalendarDays className="size-5 shrink-0 text-brand-600" />
+            <span>
+              <span className="block font-semibold text-slate-900">Check the collection schedule</span>
+              <span className="text-slate-500">See when the truck comes to your area. No account needed.</span>
+            </span>
+          </NavLink>
         </div>
       </div>
     </div>

@@ -11,10 +11,13 @@ import { ComingSoonPage } from './pages/ComingSoonPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { PublicSchedulePage } from './pages/PublicSchedulePage';
+import { MySchedulePage } from './pages/schedules/MySchedulePage';
+import { SchedulesPage } from './pages/schedules/SchedulesPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 
 // Pages that are already built. Every other menu item gets a "Coming soon" page for now.
-const BUILT_PAGES = new Set(['/', '/admin/councils', '/admin/users']);
+const BUILT_PAGES = new Set(['/', '/admin/councils', '/admin/users', '/schedules', '/my-schedule']);
 const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
 export default function App() {
@@ -23,6 +26,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          {/* Public: no login needed */}
+          <Route path="/collection-schedule" element={<PublicSchedulePage />} />
 
           {/* Every page inside here needs login */}
           <Route element={<ProtectedRoute />}>
@@ -35,6 +40,16 @@ export default function App() {
                 <Route path="/admin/councils" element={<CouncilsPage />} />
                 <Route path="/admin/councils/:councilId" element={<CouncilWardsPage />} />
                 <Route path="/admin/users" element={<UsersPage />} />
+              </Route>
+
+              {/* Council officer + admin */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'COUNCIL_OFFICER']} />}>
+                <Route path="/schedules" element={<SchedulesPage />} />
+              </Route>
+
+              {/* Household */}
+              <Route element={<ProtectedRoute allowedRoles={['HOUSEHOLD']} />}>
+                <Route path="/my-schedule" element={<MySchedulePage />} />
               </Route>
 
               {placeholderPages.map((item) => (
