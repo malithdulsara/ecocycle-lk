@@ -29,7 +29,8 @@ public class SecurityConfig {
     // Anyone (even without logging in) can read these, but only ADMIN can change them
     private static final String[] PUBLIC_READ_ENDPOINTS = {
             "/api/v1/councils/**",
-            "/api/v1/wards/**"
+            "/api/v1/wards/**",
+            "/api/v1/waste-types/**"
     };
 
     @Bean
