@@ -30,7 +30,8 @@ public class SecurityConfig {
     private static final String[] PUBLIC_READ_ENDPOINTS = {
             "/api/v1/councils/**",
             "/api/v1/wards/**",
-            "/api/v1/waste-types/**"
+            "/api/v1/waste-types/**",
+            "/api/v1/files/**"
     };
 
     @Bean

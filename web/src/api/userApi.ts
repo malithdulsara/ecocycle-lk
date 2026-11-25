@@ -8,6 +8,12 @@ export const userApi = {
     return response.data.data;
   },
 
+  // Active drivers (council officer / admin), for "assign driver"
+  async getDrivers(): Promise<User[]> {
+    const response = await api.get<ApiResponse<User[]>>('/users/drivers');
+    return response.data.data;
+  },
+
   async create(request: CreateUserRequest): Promise<User> {
     const response = await api.post<ApiResponse<User>>('/users', request);
     return response.data.data;

@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, SelectHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes } from 'react';
 import type { LucideIcon } from 'lucide-react';
 
 const FIELD_CLASSES =
@@ -56,6 +56,25 @@ export function SelectInput({ id, label, options, className = '', ...selectProps
           </option>
         ))}
       </select>
+    </div>
+  );
+}
+
+interface TextAreaInputProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  id: string;
+  label: string;
+  hint?: string;
+}
+
+// Label + multi-line text box
+export function TextAreaInput({ id, label, hint, className = '', ...textAreaProps }: Readonly<TextAreaInputProps>) {
+  return (
+    <div className="space-y-1.5">
+      <label htmlFor={id} className="text-sm font-medium text-slate-700">
+        {label}
+      </label>
+      <textarea id={id} className={`${FIELD_CLASSES} resize-none ${className}`} {...textAreaProps} />
+      {hint && <p className="text-xs text-slate-500">{hint}</p>}
     </div>
   );
 }

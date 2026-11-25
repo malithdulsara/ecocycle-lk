@@ -43,6 +43,13 @@ public class UserController {
         return ApiResponse.ok(userService.getAll());
     }
 
+    // Council officer / admin: active drivers (to assign pickups)
+    @GetMapping("/drivers")
+    @PreAuthorize("hasAnyRole('ADMIN', 'COUNCIL_OFFICER')")
+    public ApiResponse<List<UserResponse>> listDrivers() {
+        return ApiResponse.ok(userService.getActiveDrivers());
+    }
+
     // ADMIN only: create a staff account with any role
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
