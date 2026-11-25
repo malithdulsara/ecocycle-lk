@@ -12,12 +12,27 @@ import { DashboardPage } from './pages/DashboardPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PublicSchedulePage } from './pages/PublicSchedulePage';
+import { MyAddressesPage } from './pages/addresses/MyAddressesPage';
+import { DriverPickupsPage } from './pages/pickups/DriverPickupsPage';
+import { MyPickupRequestsPage } from './pages/pickups/MyPickupRequestsPage';
+import { PickupRequestsPage } from './pages/pickups/PickupRequestsPage';
 import { MySchedulePage } from './pages/schedules/MySchedulePage';
 import { SchedulesPage } from './pages/schedules/SchedulesPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
 
 // Pages that are already built. Every other menu item gets a "Coming soon" page for now.
-const BUILT_PAGES = new Set(['/', '/admin/councils', '/admin/users', '/schedules', '/my-schedule']);
+const BUILT_PAGES = new Set([
+  '/',
+  '/admin/councils',
+  '/admin/users',
+  '/schedules',
+  '/my-schedule',
+  '/requests',
+  '/my-requests',
+  '/my-addresses',
+  '/my-pickups',
+]);
+
 const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
 export default function App() {
@@ -45,11 +60,19 @@ export default function App() {
               {/* Council officer + admin */}
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'COUNCIL_OFFICER']} />}>
                 <Route path="/schedules" element={<SchedulesPage />} />
+                <Route path="/requests" element={<PickupRequestsPage />} />
               </Route>
 
               {/* Household */}
               <Route element={<ProtectedRoute allowedRoles={['HOUSEHOLD']} />}>
                 <Route path="/my-schedule" element={<MySchedulePage />} />
+                <Route path="/my-requests" element={<MyPickupRequestsPage />} />
+                <Route path="/my-addresses" element={<MyAddressesPage />} />
+              </Route>
+
+              {/* Driver */}
+              <Route element={<ProtectedRoute allowedRoles={['DRIVER']} />}>
+                <Route path="/my-pickups" element={<DriverPickupsPage />} />
               </Route>
 
               {placeholderPages.map((item) => (

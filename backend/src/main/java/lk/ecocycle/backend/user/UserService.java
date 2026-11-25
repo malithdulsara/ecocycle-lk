@@ -12,6 +12,9 @@ public interface UserService {
 
     List<UserResponse> getAll();
 
+    // Active drivers, for the "assign driver" dropdown
+    List<UserResponse> getActiveDrivers();
+
     UserResponse create(CreateUserRequest request);
 
     UserResponse update(Long currentUserId, Long userId, UpdateUserRequest request);

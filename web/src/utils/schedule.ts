@@ -36,6 +36,15 @@ export function todayIso(): string {
   return `${now.getFullYear()}-${month}-${day}`;
 }
 
+// The date N days from today as "2026-12-25" (e.g. 1 = tomorrow)
+export function addDaysIso(days: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() + days);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
 // "2026-12-25" -> "Fri, 25 Dec"
 export function formatShortDate(date: string): string {
   return parseDate(date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });

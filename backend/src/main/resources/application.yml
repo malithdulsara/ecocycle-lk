@@ -3,3 +3,12 @@ spring:
     name: ecocycle-backend
   profiles:
     active: dev
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+app:
+  storage:
+    # Uploaded photos are saved here (relative to where the backend runs). Not committed to git.
+    upload-dir: ${UPLOAD_DIR:uploads}

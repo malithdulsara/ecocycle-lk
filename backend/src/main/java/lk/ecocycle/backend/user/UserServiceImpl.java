@@ -44,6 +44,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<UserResponse> getActiveDrivers() {
+        return userRepository.findByRoleAndEnabledTrueOrderByFullNameAsc(Role.DRIVER).stream()
+                .map(UserResponse::from)
+                .toList();
+    }
+
+    @Override
     public UserResponse create(CreateUserRequest request) {
         String email = request.email().trim().toLowerCase();
         if (userRepository.existsByEmail(email)) {
