@@ -58,6 +58,14 @@ export const MENU_ITEMS: MenuItem[] = [
     section: 'Overview',
     roles: ['HOUSEHOLD'],
   },
+    {
+    label: 'Complaints',
+    path: '/my-complaints',
+    description: 'Report missed pickups and dumping',
+    icon: MessageSquareWarning,
+    section: 'Overview',
+    roles: ['HOUSEHOLD'],
+  },
   {
     label: 'My addresses',
     path: '/my-addresses',

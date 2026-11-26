@@ -52,6 +52,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<UserResponse> getActiveOfficers() {
+        return userRepository.findByRoleAndEnabledTrueOrderByFullNameAsc(Role.COUNCIL_OFFICER).stream()
+                .map(UserResponse::from)
+                .toList();
+    }
+
+    @Override
     public UserResponse create(CreateUserRequest request) {
         String email = request.email().trim().toLowerCase();
         if (userRepository.existsByEmail(email)) {

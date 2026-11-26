@@ -37,6 +37,13 @@ public class FileController {
         return ApiResponse.ok("Photo uploaded", new FileUploadResponse(fileName, "/api/v1/files/" + fileName));
     }
 
+    // Guests (no login): upload a photo for a guest complaint. Same 5 MB and image-only rules.
+    @PostMapping(value = "/guest", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<FileUploadResponse> uploadAsGuest(@RequestParam("file") MultipartFile file) {
+        return upload(file);
+    }
+
     // Public: show a photo on a web page (file names are random, so they cannot be guessed)
     @GetMapping("/{fileName}")
     public ResponseEntity<Resource> download(@PathVariable String fileName) {

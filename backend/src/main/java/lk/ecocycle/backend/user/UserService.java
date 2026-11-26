@@ -15,6 +15,9 @@ public interface UserService {
     // Active drivers, for the "assign driver" dropdown
     List<UserResponse> getActiveDrivers();
 
+    // Active council officers, for the "assign officer" dropdown
+    List<UserResponse> getActiveOfficers();
+
     UserResponse create(CreateUserRequest request);
 
     UserResponse update(Long currentUserId, Long userId, UpdateUserRequest request);
