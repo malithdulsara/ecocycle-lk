@@ -14,6 +14,12 @@ export const userApi = {
     return response.data.data;
   },
 
+    // Active council officers (council officer / admin), for "assign complaint"
+  async getOfficers(): Promise<User[]> {
+    const response = await api.get<ApiResponse<User[]>>('/users/officers');
+    return response.data.data;
+  },
+
   async create(request: CreateUserRequest): Promise<User> {
     const response = await api.post<ApiResponse<User>>('/users', request);
     return response.data.data;

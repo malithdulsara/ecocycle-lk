@@ -7,11 +7,12 @@ interface FileUpload {
 }
 
 export const fileApi = {
-  // Uploads one photo and returns its file name (send that name with the request that uses it)
-  async uploadImage(file: File): Promise<string> {
+  // Uploads one photo and returns its file name (send that name with the request that uses it).
+  // guest = true for pages used without logging in (e.g. guest complaints).
+  async uploadImage(file: File, guest = false): Promise<string> {
     const body = new FormData();
     body.append('file', file);
-    const response = await api.post<ApiResponse<FileUpload>>('/files', body, {
+    const response = await api.post<ApiResponse<FileUpload>>(guest ? '/files/guest' : '/files', body, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response.data.data.fileName;

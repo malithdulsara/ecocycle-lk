@@ -12,7 +12,10 @@ import { DashboardPage } from './pages/DashboardPage';
 import { LoginPage } from './pages/LoginPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { PublicSchedulePage } from './pages/PublicSchedulePage';
+import { ReportComplaintPage } from './pages/ReportComplaintPage';
 import { MyAddressesPage } from './pages/addresses/MyAddressesPage';
+import { ComplaintsPage } from './pages/complaints/ComplaintsPage';
+import { MyComplaintsPage } from './pages/complaints/MyComplaintsPage';
 import { DriverPickupsPage } from './pages/pickups/DriverPickupsPage';
 import { MyPickupRequestsPage } from './pages/pickups/MyPickupRequestsPage';
 import { PickupRequestsPage } from './pages/pickups/PickupRequestsPage';
@@ -31,8 +34,9 @@ const BUILT_PAGES = new Set([
   '/my-requests',
   '/my-addresses',
   '/my-pickups',
+  '/complaints',
+  '/my-complaints',
 ]);
-
 const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
 export default function App() {
@@ -43,6 +47,7 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           {/* Public: no login needed */}
           <Route path="/collection-schedule" element={<PublicSchedulePage />} />
+          <Route path="/report-problem" element={<ReportComplaintPage />} />
 
           {/* Every page inside here needs login */}
           <Route element={<ProtectedRoute />}>
@@ -61,6 +66,7 @@ export default function App() {
               <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'COUNCIL_OFFICER']} />}>
                 <Route path="/schedules" element={<SchedulesPage />} />
                 <Route path="/requests" element={<PickupRequestsPage />} />
+                <Route path="/complaints" element={<ComplaintsPage />} />
               </Route>
 
               {/* Household */}
@@ -68,6 +74,7 @@ export default function App() {
                 <Route path="/my-schedule" element={<MySchedulePage />} />
                 <Route path="/my-requests" element={<MyPickupRequestsPage />} />
                 <Route path="/my-addresses" element={<MyAddressesPage />} />
+                <Route path="/my-complaints" element={<MyComplaintsPage />} />
               </Route>
 
               {/* Driver */}

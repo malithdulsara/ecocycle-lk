@@ -23,6 +23,10 @@ public class SecurityConfig {
             "/api/v1/auth/refresh",
             "/api/v1/auth/logout",
             "/api/v1/system/**",
+            // Guests can report a complaint (with a photo) and check its status without logging in
+            "/api/v1/complaints/guest",
+            "/api/v1/complaints/track/**",
+            "/api/v1/files/guest",
             "/actuator/health"
     };
 

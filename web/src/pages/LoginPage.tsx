@@ -1,6 +1,6 @@
 import { useState, type SubmitEvent } from 'react';
 import { Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { CalendarDays, CircleAlert, Eye, EyeOff, Leaf, Lock, Mail, MapPinned, Truck } from 'lucide-react';
+import { CalendarDays, CircleAlert, Eye, EyeOff, Leaf, Lock, Mail, MapPinned, MessageSquareWarning, Truck } from 'lucide-react';
 import { getErrorMessage } from '../api/client';
 import { useAuth } from '../auth/useAuth';
 import { Logo } from '../components/Logo';
@@ -156,6 +156,18 @@ export function LoginPage() {
             <span>
               <span className="block font-semibold text-slate-900">Check the collection schedule</span>
               <span className="text-slate-500">See when the truck comes to your area. No account needed.</span>
+            </span>
+          </NavLink>
+          
+          {/* Guests can also report a problem without an account */}
+          <NavLink
+            to="/report-problem"
+            className="mt-3 flex items-center gap-3 rounded-xl border border-slate-200 p-4 text-sm transition hover:border-brand-300 hover:bg-brand-50"
+          >
+            <MessageSquareWarning className="size-5 shrink-0 text-brand-600" />
+            <span>
+              <span className="block font-semibold text-slate-900">Report a waste problem</span>
+              <span className="text-slate-500">Missed pickup or illegal dumping? Tell the council.</span>
             </span>
           </NavLink>
         </div>
