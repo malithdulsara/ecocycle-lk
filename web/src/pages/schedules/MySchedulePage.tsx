@@ -5,6 +5,7 @@ import { EmptyState } from '../../components/EmptyState';
 import { PageLoader } from '../../components/Spinner';
 import { PageHeader } from '../../components/ui/PageHeader';
 import { UpcomingCollections } from '../../components/schedule/UpcomingCollections';
+import { LiveTruckCard } from '../../components/tracking/LiveTruckCard';
 import { useApiData } from '../../hooks/useApiData';
 import type { WardCollections } from '../../types/schedule';
 
@@ -50,6 +51,7 @@ export function MySchedulePage() {
               <p className="text-sm text-slate-600">{schedule.councilName}</p>
             </div>
           </div>
+          <LiveTruckCard />
           <UpcomingCollections collections={schedule.collections} />
         </>
       )}

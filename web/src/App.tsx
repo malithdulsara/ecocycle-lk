@@ -16,6 +16,9 @@ import { ReportComplaintPage } from './pages/ReportComplaintPage';
 import { MyAddressesPage } from './pages/addresses/MyAddressesPage';
 import { ComplaintsPage } from './pages/complaints/ComplaintsPage';
 import { MyComplaintsPage } from './pages/complaints/MyComplaintsPage';
+import { MyRoutePage } from './pages/driver/MyRoutePage';
+import { FleetMapPage } from './pages/fleet/FleetMapPage';
+import { TrucksRoutesPage } from './pages/fleet/TrucksRoutesPage';
 import { DriverPickupsPage } from './pages/pickups/DriverPickupsPage';
 import { MyPickupRequestsPage } from './pages/pickups/MyPickupRequestsPage';
 import { PickupRequestsPage } from './pages/pickups/PickupRequestsPage';
@@ -36,6 +39,9 @@ const BUILT_PAGES = new Set([
   '/my-pickups',
   '/complaints',
   '/my-complaints',
+  '/trucks',
+  '/fleet',
+  '/my-route',
 ]);
 const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
@@ -67,6 +73,8 @@ export default function App() {
                 <Route path="/schedules" element={<SchedulesPage />} />
                 <Route path="/requests" element={<PickupRequestsPage />} />
                 <Route path="/complaints" element={<ComplaintsPage />} />
+                <Route path="/trucks" element={<TrucksRoutesPage />} />
+                <Route path="/fleet" element={<FleetMapPage />} />
               </Route>
 
               {/* Household */}
@@ -80,6 +88,7 @@ export default function App() {
               {/* Driver */}
               <Route element={<ProtectedRoute allowedRoles={['DRIVER']} />}>
                 <Route path="/my-pickups" element={<DriverPickupsPage />} />
+                <Route path="/my-route" element={<MyRoutePage />} />
               </Route>
 
               {placeholderPages.map((item) => (
