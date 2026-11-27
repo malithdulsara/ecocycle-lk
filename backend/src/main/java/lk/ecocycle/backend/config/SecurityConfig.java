@@ -27,6 +27,8 @@ public class SecurityConfig {
             "/api/v1/complaints/guest",
             "/api/v1/complaints/track/**",
             "/api/v1/files/guest",
+            // WebSocket handshake. The login token is checked in StompAuthInterceptor.
+            "/ws/**",
             "/actuator/health"
     };
 

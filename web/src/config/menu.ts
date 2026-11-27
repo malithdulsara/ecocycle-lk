@@ -50,7 +50,7 @@ export const MENU_ITEMS: MenuItem[] = [
     section: 'Overview',
     roles: ['HOUSEHOLD'],
   },
-    {
+  {
     label: 'Pickup requests',
     path: '/my-requests',
     description: 'Ask for a special or bulk pickup',
@@ -58,7 +58,7 @@ export const MENU_ITEMS: MenuItem[] = [
     section: 'Overview',
     roles: ['HOUSEHOLD'],
   },
-    {
+  {
     label: 'Complaints',
     path: '/my-complaints',
     description: 'Report missed pickups and dumping',
@@ -92,7 +92,7 @@ export const MENU_ITEMS: MenuItem[] = [
     section: 'Operations',
     roles: ['DRIVER'],
   },
-    {
+  {
     label: 'My pickups',
     path: '/my-pickups',
     description: 'Special pickups assigned to you',
@@ -123,6 +123,14 @@ export const MENU_ITEMS: MenuItem[] = [
     path: '/complaints',
     description: 'Missed pickups and illegal dumping',
     icon: MessageSquareWarning,
+    section: 'Operations',
+    roles: ['COUNCIL_OFFICER', 'ADMIN'],
+  },
+  {
+    label: 'Trucks & routes',
+    path: '/trucks',
+    description: 'Trucks and daily routes for each ward',
+    icon: Truck,
     section: 'Operations',
     roles: ['COUNCIL_OFFICER', 'ADMIN'],
   },
