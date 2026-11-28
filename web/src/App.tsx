@@ -17,11 +17,14 @@ import { MyAddressesPage } from './pages/addresses/MyAddressesPage';
 import { ComplaintsPage } from './pages/complaints/ComplaintsPage';
 import { MyComplaintsPage } from './pages/complaints/MyComplaintsPage';
 import { MyRoutePage } from './pages/driver/MyRoutePage';
+import { DropOffsPage } from './pages/dropoffs/DropOffsPage';
 import { FleetMapPage } from './pages/fleet/FleetMapPage';
 import { TrucksRoutesPage } from './pages/fleet/TrucksRoutesPage';
 import { DriverPickupsPage } from './pages/pickups/DriverPickupsPage';
 import { MyPickupRequestsPage } from './pages/pickups/MyPickupRequestsPage';
 import { PickupRequestsPage } from './pages/pickups/PickupRequestsPage';
+import { MyPointsPage } from './pages/points/MyPointsPage';
+import { RewardsAdminPage } from './pages/rewards/RewardsAdminPage';
 import { MySchedulePage } from './pages/schedules/MySchedulePage';
 import { SchedulesPage } from './pages/schedules/SchedulesPage';
 import { UnauthorizedPage } from './pages/UnauthorizedPage';
@@ -42,6 +45,9 @@ const BUILT_PAGES = new Set([
   '/trucks',
   '/fleet',
   '/my-route',
+  '/my-points',
+  '/drop-offs',
+  '/rewards',
 ]);
 const placeholderPages = MENU_ITEMS.filter((item) => !BUILT_PAGES.has(item.path));
 
@@ -83,12 +89,23 @@ export default function App() {
                 <Route path="/my-requests" element={<MyPickupRequestsPage />} />
                 <Route path="/my-addresses" element={<MyAddressesPage />} />
                 <Route path="/my-complaints" element={<MyComplaintsPage />} />
+                <Route path="/my-points" element={<MyPointsPage />} />
               </Route>
 
               {/* Driver */}
               <Route element={<ProtectedRoute allowedRoles={['DRIVER']} />}>
                 <Route path="/my-pickups" element={<DriverPickupsPage />} />
                 <Route path="/my-route" element={<MyRoutePage />} />
+              </Route>
+
+              {/* Centre operator */}
+              <Route element={<ProtectedRoute allowedRoles={['CENTRE_OPERATOR']} />}>
+                <Route path="/drop-offs" element={<DropOffsPage />} />
+              </Route>
+
+              {/* Recycler manager + admin */}
+              <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'RECYCLER_MANAGER']} />}>
+                <Route path="/rewards" element={<RewardsAdminPage />} />
               </Route>
 
               {placeholderPages.map((item) => (
